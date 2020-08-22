@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registrace na web</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <ul class="menu">
+        <li><a href="{{ url_for('home') }}">Domů</a></li>
+        <li><a href="{{ url_for('login') }}">Přihlášení</a></li>
+        <li><a href="#registrace">Registrace</a></li>
+    </ul>
+
+    <section class="login" id="login">
+        <h2>Přihlášení</h2>
+        <form action="" method="POST">
+
+        <p>
+            {{form.username.label}} <br>
+            {{form.username(size=20)}}
+        </p>
+
+        <p>
+            {{form.password.label}} <br>
+            {{form.password(size=20)}}
+        </p>
+
+        <p>
+            {{form.submit()}}
+        </p>
+        </form>
+    </section>
+</body>
+</html>

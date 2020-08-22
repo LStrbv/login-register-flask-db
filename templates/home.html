@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domů</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <ul class="menu">
+        <li><a href="{{ url_for('home') }}">Domů</a></li>
+        <li><a href="{{ url_for('login') }}">Přihlášení</a></li>
+        <li><a href="#registrace">Registrace</a></li>
+    </ul>
+    <section class="home" id="home">
+        <p>Vítej na webu.</p>
+        
+        <p>Pokud máš užívatelský účet, přihlas se.</p>
+
+        <p>Pokud uživatelský účet nemáš, zaregistruj se.</p>
+    </section>
+
+</body>
+</html>
