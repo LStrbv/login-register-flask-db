@@ -1,11 +1,11 @@
 from flask import Flask, render_template, url_for
 from flask_wtf import FlaskForm
+# from flask_login import LoginManager
 from wtforms import StringField, PasswordField, SubmitField
 import secrets
 secret_key = secrets.token_hex(16)
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = secret_key
 
 
@@ -18,17 +18,32 @@ def home():
 @app.route('/login')
 def login():
     """Return login form."""
-    form = SignUpForm()
+    form = SignInForm()
     return render_template('login.html', form=form)
 
 
-class SignUpForm(FlaskForm):
-    """Define sign up form."""
+@app.route('/register')
+def registration():
+    """Return registration form."""
+    form = RegisterForm()
+    return render_template('register.html', form=form)
+
+
+class SignInForm(FlaskForm):
+    """Define sign in form."""
 
     username = StringField('Uživatel')
     password = PasswordField('Heslo')
     submit = SubmitField('Přihlásit')
 
 
+class RegisterForm(FlaskForm):
+    """Define sign up form."""
+
+    username = StringField('Uživatel')
+    password = PasswordField('Heslo')
+    signup = SubmitField('Registrovat')
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

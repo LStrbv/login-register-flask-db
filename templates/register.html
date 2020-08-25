@@ -10,12 +10,12 @@
     <ul class="menu">
         <li><a href="{{ url_for('home') }}">Domů</a></li>
         <li><a href="{{ url_for('login') }}">Přihlášení</a></li>
-        <li><a href="{{ url_for('registration') }}">Registrace</a></li>
+        <li><a href="{{ url_for('register') }}">Registrace</a></li>
     </ul>
 
-    <div class="login" id="login">
-        <h2>Přihlášení</h2>
-        <form action="" method="POST">
+    <div class="registter" id="register">
+        <h2>Registrace</h2>
+        <form action="" method="GET">
 
         <p class="username">
             {{form.username.label}} <br>
@@ -28,9 +28,7 @@
         </p>
 
         <p>
-            {{form.submit()}}
+            {{form.signup()}}
         </p>
         </form>
     </div>
-</body>
-</html>
