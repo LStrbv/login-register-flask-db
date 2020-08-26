@@ -10,14 +10,14 @@
     <ul class="menu">
         <li><a href="{{ url_for('home') }}">Domů</a></li>
         <li><a href="{{ url_for('login') }}">Přihlášení</a></li>
-        <li><a href="#registrace">Registrace</a></li>
+        <li><a href="{{ url_for('register') }}">Registrace</a></li>
     </ul>
     <section class="home" id="home">
         <p>Vítej na webu.</p>
         
         <p>Pokud máš užívatelský účet, <a href="{{ url_for('login') }}">přihlas se</a>.</p>
 
-        <p>Pokud uživatelský účet nemáš, <a href="{{ url_for('registration') }}">zaregistruj se</a>.</p>
+        <p>Pokud uživatelský účet nemáš, <a href="{{ url_for('register') }}">zaregistruj se</a>.</p>
     </section>
 
 </body>
