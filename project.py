@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, GET, POST
 from flask_wtf import FlaskForm
 # from flask_login import LoginManager
 from wtforms import StringField, PasswordField, SubmitField
@@ -15,7 +15,7 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/login')
+@app.route('/login', methods=[GET, POST])
 def login():
     """Return login form."""
     form = SignInForm()
