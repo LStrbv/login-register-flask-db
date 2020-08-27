@@ -20,4 +20,8 @@
 
 .username {
     background-color: grey;
+    padding: 60px;
+    margin: 30px;
+    border-radius: 50px;
+    align-content: center;
 }
