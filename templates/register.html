@@ -15,17 +15,23 @@
 
     <div class="register" id="register">
         <h2>Registrace</h2>
-        <form action="" method="GET, POST">
+        <form action="/register" method="POST">
 
-        <p class="username">
-            {{form.username.label}} <br>
-            {{form.username(size=20)}}
-        </p>
+        <fieldset class="username">
+            {{form.username.label}} 
+            {{form.username(size=20, placeholder='name')}}
+            {% if form.username.errors %}
+            <ul class="errors">
+                {% for error in form.username.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+        </fieldset>
 
-        <p>
-            {{form.password.label}} <br>
+        <fieldset class="password">
+            {{form.password.label}}
             {{form.password(size=20)}}
-        </p>
+        </fieldset>
 
         <p>
             {{form.confirm_password.label}} <br>
