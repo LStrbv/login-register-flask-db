@@ -31,5 +31,3 @@ class RegisterForm(FlaskForm):
         ]
     )
     signup = SubmitField('Registrovat')
-
-# git
