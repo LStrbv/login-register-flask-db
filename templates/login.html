@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
+
+    
     <ul class="menu">
         <li><a href="{{ url_for('home') }}">Domů</a></li>
         <li><a href="{{ url_for('login') }}">Přihlášení</a></li>
@@ -19,11 +21,21 @@
         <form action="/login" method="POST",>
 
         <fieldset class="username">
-            {{form.username.label}} 
+            {% with messages = get_flashed_messages() %}
+         {% if messages %}
+            <ul>
+               {% for message in messages %}
+               {{ message }}
+               {% endfor %}
+            </ul>
+         {% endif %}
+      {% endwith %}
+            {{form.username.label}}
             {{form.username(size=20)}}
-        </fieldset>
-
-        <fieldset class="password">
+		
+            
+        <!--- </fieldset> --->
+        <!---<fieldset class="password">--->
             {{form.password.label}}
             {{form.password(size=20)}}
         </fieldset>
@@ -37,4 +49,3 @@
 </body>
 </html>
 
-<!-- Write your comments here -->

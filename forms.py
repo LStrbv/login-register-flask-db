@@ -4,7 +4,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, EqualTo, Length
 
 
-class SignInForm(FlaskForm):
+class LoginForm(FlaskForm):
     """Login form."""
 
     username = StringField('Uživatel', validators=[DataRequired()])
@@ -27,7 +27,7 @@ class RegisterForm(FlaskForm):
         'Potvrď heslo',
         validators=[
             DataRequired(),
-            EqualTo('password', message='Hesla se musí shodovat.')
+            EqualTo('Heslo', message='Hesla se musí shodovat.')
         ]
     )
     signup = SubmitField('Registrovat')

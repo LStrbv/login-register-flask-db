@@ -13,15 +13,12 @@
         <li><a href="{{ url_for('login') }}">Přihlášení</a></li>
         <li><a href="{{ url_for('register') }}">Registrace</a></li>
     </ul>
-    <section class="home" id="home">
-        <p>Vítej na webu.</p>
-        
-        <p>Pokud máš užívatelský účet, <a href="{{ url_for('login') }}">přihlas se</a>.</p>
+    {% block content %}
+    <div class="user">
+        <p>{{name}}, Vítej na webu!</p>
 
-        <p>Pokud uživatelský účet nemáš, <a href="{{ url_for('register') }}">zaregistruj se</a>.</p>
-    </section>
-
+        <p>Na webu jsou registrovaní tito uživatelé:</p>
+    </div>
+    {% endblock %}
 </body>
 </html>
-
-<!-- Write your comments here -->
