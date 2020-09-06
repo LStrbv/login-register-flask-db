@@ -1,49 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>registrace na web</title>
-    <link rel="stylesheet" href="static/style.css">
-</head>
+
 <body>
-
-    
-    <ul class="menu">
-        <li><a href="{{ url_for('home') }}">Domů</a></li>
-        <li><a href="{{ url_for('login') }}">Přihlášení</a></li>
-        <li><a href="{{ url_for('register') }}">Registrace</a></li>
-    </ul>
-
-    {% block content %}
+    {% extends "home.html" %}
+    {% block content %} 
     <div class="login" id="login">
         <h2>Přihlášení</h2>
         <form action="/login" method="POST",>
 
-        <fieldset class="username">
-            {% with messages = get_flashed_messages() %}
-         {% if messages %}
-            <ul>
-               {% for message in messages %}
-               {{ message }}
-               {% endfor %}
-            </ul>
-         {% endif %}
-      {% endwith %}
+        <fieldset class="login-form">
+           
             {{form.username.label}}
             {{form.username(size=20)}}
 		
-            
-        <!--- </fieldset> --->
-        <!---<fieldset class="password">--->
+
             {{form.password.label}}
             {{form.password(size=20)}}
         </fieldset>
 
-        <p>
+        <p id="button">
             {{form.submit()}}
         </p>
         </form>
+        <p>Pokud uživatelský účet nemáš, <a href="{{ url_for('register') }}">zaregistruj se</a>.</p>
     </div>
     {% endblock %}
 </body>

@@ -1,11 +1,13 @@
+
 .menu {
     margin: 0; padding: 0;
-    text-align: center;
-    background-color: green;
+    text-align: left;
+    background-color: lightgreen;
+    
 }
 
-.menu a {display: inline-block;
-        color: white;
+.menu a {
+        color: rgb(49, 23, 23);
     text-decoration: none;
     padding: 20px 30px; 
 }
@@ -14,12 +16,7 @@
     display: inline-block;
     font-weight: 700;
 }
-.domu {
-    text-align: center;
-}
 
 .fieldset {
-    background-color: beige;
-    border-radius: 20px;
-    display: inline-block;
-}
+    background-color: grey;
+} 

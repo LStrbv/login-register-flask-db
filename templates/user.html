@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-    
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="static/style.css">
-</head>
 <body>
-    <ul class="menu">
-        <li><a href="{{ url_for('home') }}">Domů</a></li>
-        <li><a href="{{ url_for('login') }}">Přihlášení</a></li>
-        <li><a href="{{ url_for('register') }}">Registrace</a></li>
-    </ul>
+    {% extends "home.html" %}
     {% block content %}
     <div class="user">
         <p>{{name}}, Vítej na webu!</p>
 
-        <p>Na webu jsou registrovaní tito uživatelé:</p>
+        <p>Na webu jsou registrovaní tito uživatelé: {{list}}</p>
     </div>
     {% endblock %}
 </body>
