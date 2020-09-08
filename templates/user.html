@@ -1,11 +1,9 @@
-<body>
-    {% extends "home.html" %}
+{% extends "layout.html" %}
     {% block content %}
     <div class="user">
         <p>{{name}}, Vítej na webu!</p>
 
         <p>Na webu jsou registrovaní tito uživatelé: {{list}}</p>
     </div>
-    {% endblock %}
-</body>
-</html>
+{% endblock %}
+

@@ -1,6 +1,4 @@
-
-<body>
-    {% extends "home.html" %}
+{% extends "layout.html" %}
     {% block content %} 
     <div class="register" id="register">
         
@@ -24,7 +22,7 @@
         <p>Pokud máš užívatelský účet, <a href="{{ url_for('login') }}">přihlas se</a>.</p>
         
     </div>
-    {% endblock %}
-</body>
+{% endblock %}
+
 
     

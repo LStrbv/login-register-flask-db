@@ -7,33 +7,34 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class UsersDatabase:
     """Modify users database."""
 
-    def __init__(self, username, password):
+    def __init__(self):
         """Modify users database from json to python dictionary."""
         with open('UsersDatabase.json', encoding='utf=8') as json_string:
             users = json.load(json_string)
         self.users = users
-        self.username = username
-        self.password = password
 
-    def exists_user(self):
+    def exists_user(self, username):
         """Control if user exists."""
         users_name = self.users.keys()
-        if self.username in users_name:
+        if username in users_name:
             return True
         else:
             flash('Uživatel neexistuje.')
 
-    def add_user(self):
+    def add_user(self, username, password):
         """Add new user to the dictionary."""
+        self.username = username
+        self.password = password
         if (self.username, self.password not in self.users.items()):
             self.users.update({self.username: generate_password_hash(self.password)})
             data = self.users
             with open("UsersDatabase.json", "w", encoding='utf=8') as outfile:
                 json.dump(data, outfile)
 
-    def remove_user(self):
+    def remove_user(self, username):
         """Remove user from the dictionary."""
-        if (self.username, self.password in self.users.items()):
+        self.username = username
+        if (self.username in self.users.keys()):
             self.users.pop(self.username)
             data = self.users
             with open("UsersDatabase.json", "w", encoding='utf=8') as outfile:
@@ -46,9 +47,9 @@ class UsersDatabase:
 
     def check_password(self, password):
         """Check hashed password."""
+        self.password = password
         if self.password in self.users.values():
-            return check_password_hash(self.password, password)
-            
+            check_password_hash(self.password, password)
 
     def users_list(self):
         """Return list of users names."""
@@ -59,8 +60,13 @@ class UsersDatabase:
         joined_string_users = ", ".join(users_string)
         return joined_string_users
 
-""" user = UsersDatabase('LStrbv', 'banan')
-user.exists_user()
-user.users_list()
-user.set_password('banan')
-user.check_password('banan') """
+    def get_id(self, username):
+        """Return username as user id."""
+        self.username = username
+        if self.username in self.users.keys():
+            return username
+        else:
+            return None
+
+
+# user = UsersDatabase()
