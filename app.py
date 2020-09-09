@@ -16,7 +16,11 @@ login_manager.init_app(app)
 login_manager.user_loader
 
 
-user = UsersDatabase()
+UsersDatabase = UsersDatabase()
+@app.route('/')
+def home():
+    """Return home page."""
+    return render_template('layout.html')
 
 
 @app.route('/user')
@@ -24,19 +28,20 @@ def user():
     """Return user profile page."""
     return render_template('user.html')
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Return login form."""
     form = LoginForm()
     username = form.username.data
-    if form.validate_on_submit():
-        if user.exists_user(username):
-            user.check_password(password=form.password.data)
-            login_user(user)
-            users_list = user.users_list()
-            return render_template('user.html', name=username, list=users_list)
-        flash('Chybné jméno nebo heslo')
-        return redirect(url_for('login', title='Přihlášení'))
+    #if form.validate_on_submit():
+    if UsersDatabase.exists_user(username):
+        UsersDatabase.check_password(password=form.password.data)
+        login_user(UsersDatabase)
+        users_list = UsersDatabase.users_list()
+        return render_template('user.html', name=username, list=users_list)
+        """ flash('Chybné jméno nebo heslo')
+        return redirect(url_for('login', title='Přihlášení')) """
     return render_template('login.html', form=form, title='Přihlášení')
 
 
@@ -47,23 +52,25 @@ def register():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-        if user.exists_user(username) is not True:
-            user.add_user(username, password)
-            user.set_password(password)
-            login_user(user)
+        if UsersDatabase.exists_user(username) is not True:
+            UsersDatabase.add_user(username, password)
+            UsersDatabase.set_password(password)
+            login_user(UsersDatabase)
             return redirect(url_for('user'))
         flash('Uživatel s tímto jménem už existuje.')
     return render_template('register.html', form=form, title='Registrace')
 
 
 @login_manager.user_loader
-def get_id(self, username):
+def load_user(username):
     """Check if user is logged-in upon page load."""
     form = LoginForm()
     username = form.username.data
-    if user.get_id(username):
+    if UsersDatabase.get_id(username):
         return username
     return None
+
+
 
 
 if __name__ == "__main__":

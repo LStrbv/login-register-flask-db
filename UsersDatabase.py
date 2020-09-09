@@ -17,7 +17,7 @@ class UsersDatabase:
         """Control if user exists."""
         users_name = self.users.keys()
         if username in users_name:
-            return True
+            return username
         else:
             flash('Uživatel neexistuje.')
 
@@ -63,10 +63,10 @@ class UsersDatabase:
     def get_id(self, username):
         """Return username as user id."""
         self.username = username
-        if self.username in self.users.keys():
-            return username
-        else:
-            return None
-
+        if (self.username in self.users.keys()):
+            return self.username
+     
+    def is_active(self):
+        return True
 
 # user = UsersDatabase()
