@@ -1,8 +1,8 @@
 """Routes for home, login and register."""
 from forms import LoginForm, RegisterForm
 from UsersDatabase import UsersDatabase
-from flask_login import login_user, LoginManager
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash, session, request
+from flask_login import login_user, LoginManager, current_user, logout_user
 import secrets
 secret_key = secrets.token_hex(16)
 
@@ -36,12 +36,13 @@ def login():
     username = form.username.data
     #if form.validate_on_submit():
     if UsersDatabase.exists_user(username):
-        UsersDatabase.check_password(password=form.password.data)
-        login_user(UsersDatabase)
+        UsersDatabase.generate_password(password=form.password.data)
+        login_user(UsersDatabase, remember=True)
+        flash('Přihlášení proběhlo úspěšně.')
         users_list = UsersDatabase.users_list()
         return render_template('user.html', name=username, list=users_list)
-        """ flash('Chybné jméno nebo heslo')
-        return redirect(url_for('login', title='Přihlášení')) """
+    """flash('Chybné jméno nebo heslo')
+    return redirect(url_for('login', title='Přihlášení')) """
     return render_template('login.html', form=form, title='Přihlášení')
 
 
@@ -53,8 +54,8 @@ def register():
         username = form.username.data
         password = form.password.data
         if UsersDatabase.exists_user(username) is not True:
-            UsersDatabase.add_user(username, password)
-            UsersDatabase.set_password(password)
+            UsersDatabase.session.add_user(username, password)
+            UsersDatabase.generate_password(password)
             login_user(UsersDatabase)
             return redirect(url_for('user'))
         flash('Uživatel s tímto jménem už existuje.')
@@ -62,14 +63,14 @@ def register():
 
 
 @login_manager.user_loader
-def load_user(username):
+def load_user(id):
     """Check if user is logged-in upon page load."""
-    form = LoginForm()
-    username = form.username.data
-    if UsersDatabase.get_id(username):
-        return username
-    return None
+    return id
 
+@app.errorhandler(404)
+def page_not_found(error):
+    """Return when page doesnt exist."""
+    return render_template('404.html'), 404
 
 
 

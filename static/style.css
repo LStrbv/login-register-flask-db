@@ -1,22 +1,40 @@
+* { box-sizing: border-box }
+.body {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
 
 .menu {
-    margin: 0; padding: 0;
     text-align: left;
-    background-color: lightgreen;
-    
+    background-color: lightgreen;   
 }
 
 .menu a {
-        color: rgb(49, 23, 23);
+    color:whitesmoke;
     text-decoration: none;
-    padding: 20px 30px; 
+    text-align: left;
+    padding: 20px 28px;
+    display: inline;
 }
 
+.menu a:hover {
+    background-color:whitesmoke;
+    color:lightgreen;
+}
+
+.menu a:active {
+    background-color: mediumseagreen;
+    color: whitesmoke;
+}
 .menu li {
-    display: inline-block;
+    display: inline;
     font-weight: 700;
 }
 
-.fieldset {
-    background-color: grey;
-} 
+.form {
+    margin: 10px 40px;
+    background-color: red;
+}

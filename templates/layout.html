@@ -6,11 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
     <link rel="stylesheet" href="static/style.css">
+    <script src="{{url_for('static', filename='jsfile.js')}}"></script>
 </head>
 <body>
-    <ul class="menu">
-        <li><a href="{{ url_for('login') }}">Přihlášení</a></li>
-        <li><a href="{{ url_for('register') }}">Registrace</a></li>
+    <ul class="menu" id="menu">
+      <li><a href="{{ url_for('home') }}">Domů</a></li>
+      <li><a href="{{ url_for('login') }}">Přihlášení</a></li>
+      <li><a href="{{ url_for('register') }}">Registrace</a></li>
+      {% if current_user.is_authenticated %}
+      <li><a href="{{ url_for('user') }}">{{current_user.username}}</a></li>
+  {% else %}
+  {% endif %}
     </ul>
     {% with messages = get_flashed_messages() %}
   {% if messages %}

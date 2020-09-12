@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
     {% block content %} 
-    <div class="register" id="register">
+    <div class="form" id="form">
         
         <form action="/register" method="POST">
-
+        <h2>Registrace</h2>
         <fieldset class="register-form">
-            <h2>Registrace</h2>
+            
             <p>
                 {{form.username.label}} 
                 {{form.username(size=20, placeholder='Uživatel')}}

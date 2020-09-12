@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
     {% block content %} 
-    <div class="login" id="login">
+    <div class="form" id="form">
         <h2>Přihlášení</h2>
         <form action="/login" method="POST",>
 
@@ -12,11 +12,14 @@
 
             {{form.password.label}}
             {{form.password(size=20)}}
+
+            <p id="button">
+                {{form.submit()}}
+            </p>
         </fieldset>
 
-        <p id="button">
-            {{form.submit()}}
-        </p>
+
+        
         </form>
         <p>Pokud uživatelský účet nemáš, <a href="{{ url_for('register') }}">zaregistruj se</a>.</p>
     </div>
