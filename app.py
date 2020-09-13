@@ -31,12 +31,18 @@ def user():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """Return login form."""
+    """GET return registration form.
+        POST requests validate and redirect user to home page."""
+    # If user is logged in.
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
     form = LoginForm()
     username = form.username.data
+    password=form.password.data
     #if form.validate_on_submit():
     if UsersDatabase.exists_user(username):
-        UsersDatabase.generate_password(password=form.password.data)
+        UsersDatabase.check_password(username, password)
         login_user(UsersDatabase, remember=True)
         flash('Přihlášení proběhlo úspěšně.')
         users_list = UsersDatabase.users_list()
@@ -48,7 +54,7 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    """Return registration form."""
+    """Return signup page."""
     form = RegisterForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -59,7 +65,8 @@ def register():
             login_user(UsersDatabase)
             return redirect(url_for('user'))
         flash('Uživatel s tímto jménem už existuje.')
-    return render_template('register.html', form=form, title='Registrace')
+        return render_template('register.html', form=form, title='Registrace')
+    return render_template('404.html')
 
 
 @login_manager.user_loader

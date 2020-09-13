@@ -3,23 +3,35 @@
     <div class="form" id="form">
         <h2>Přihlášení</h2>
         <form action="/login" method="POST",>
+        <div class=form>
 
-        <fieldset class="login-form">
-           
-            {{form.username.label}}
-            {{form.username(size=20)}}
-		
+            <fieldset class="username">
+                {{form.username.label}}
+                {{form.username(size=20)}}
+                {% if form.username.errors %}
+                      <ul class="errors">
+                        {% for error in form.username.errors %}
+                          <li>{{ error }}</li>{% endfor %}
+                      </ul>
+                    {% endif %}
+            </fieldset>
 
-            {{form.password.label}}
-            {{form.password(size=20)}}
-
-            <p id="button">
+            <fieldset class="password">
+                {{form.password.label}}
+                {{form.password(size=20)}}
+                {% if form.password.errors %}
+                      <ul class="errors">
+                        {% for error in form.password.errors %}
+                          <li>{{ error }}</li>{% endfor %}
+                      </ul>
+                    {% endif %}
+            </fieldset>
+               
+            <div class="submit_button">
                 {{form.submit()}}
-            </p>
-        </fieldset>
+            </div> 
 
-
-        
+        </div>
         </form>
         <p>Pokud uživatelský účet nemáš, <a href="{{ url_for('register') }}">zaregistruj se</a>.</p>
     </div>
