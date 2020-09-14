@@ -20,14 +20,14 @@ class RegisterForm(FlaskForm):
         'Heslo',
         validators=[
             DataRequired(),
-            Length(min=7, message='Heslo musí obsahovat nejméně 6 znaků.'),
+            Length(min=3, message='Heslo musí obsahovat nejméně 6 znaků.'),
         ]
     )
     confirm_password = PasswordField(
         'Potvrď heslo',
         validators=[
             DataRequired(),
-            EqualTo('Heslo', message='Hesla se musí shodovat.')
+            EqualTo('password', message='Hesla se musí shodovat.')
         ]
     )
     signup = SubmitField('Registrovat')

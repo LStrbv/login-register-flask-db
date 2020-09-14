@@ -4,59 +4,71 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-class UsersDatabase(UserMixin):
+class User(UserMixin):
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+    def to_dict(self):
+        return {"username": self.username, "password": self.password}
+
+    def check_password(self, password):
+        """Check hashed password."""
+
+        return check_password_hash(self.password, password)
+
+    def get_id(self):
+        return self.username
+
+
+
+class UsersDatabase():
     """Modify users database."""
 
     def __init__(self):
         """Modify users database from json to python dictionary."""
-        with open('UsersDatabase.json', encoding='utf=8') as json_string:
-            users = json.load(json_string)
-            print(users)
-        self.users = users
-        self.id = self.users.keys()
-        # Hodily by se ti tu dvě metody, jedna která načte data ze souboru a druhá,
-        # která bude ukládat.
-        # Osobně bych zrušil self.users, udržovat to synchronizavné s tím co je v
-        # souboru je zbytečná komplikace.
-        # V metodá bys potom vlastně měla
-        # users = self.load()
-        # ...
-        # a když bys potom potřebovala uložit, tak
-        # self.save(users)
+        self.file_name = 'UsersDatabase.json'
 
-    def exists_user(self, username):
-        """Control if user exists."""
-        if username in self.users:
-            return True
+    def load(self):
+        with open(self.file_name, encoding='utf=8') as json_string:
+            users = json.load(json_string)
+            new_dict = dict()
+            for username, user in users.items():
+                new_dict[user['username']] = User(user['username'], user['password'])
+            return new_dict
+
+    def save(self, users):
+        json_dict = dict()
+        for username, user in users.items():
+            json_dict[username] = user.to_dict()
+        with open(self.file_name, "w", encoding='utf=8') as outfile:
+            json.dump(json_dict, outfile)
 
     def add_user(self, username, password):
         """Add new user to the dictionary."""
-        if self.exists_user(username) is not True:
-            self.users[username] = {"username": username, "password": password}
-            data = self.users
-            with open("UsersDatabase.json", "w", encoding='utf=8') as outfile:
-                json.dump(data, outfile)
+        if not self.get_by_id(username):
+            users = self.load()
+            users[username] = User(username, self.generate_password(password))
+            self.save(users)
+            return users[username]
 
     def remove_user(self, username):
         """Remove user from the dictionary."""
-        if self.exists_user(username):
-            self.users.pop(username)
-            data = self.users
-            with open("UsersDatabase.json", "w", encoding='utf=8') as outfile:
-                json.dump(data, outfile)
+        if self.get_by_id(username):
+            users = self.load()
+            users.pop(username)
+            self.save(users)
 
     def generate_password(self, password):
         """Create hashed password."""
         return generate_password_hash(password, method='sha256')
 
-    def check_password(self, username, password):
-        """Check hashed password."""
-        return check_password_hash(self.password, password)
-    # Mělo by se kontrolovat heslo konkrétního uživatele. Takže ta metoda bude
-    # potřebovat i username uživatel jehož heslo se kontroluje. To si (zahashované)
-    # načte a zkontroluje pomocí check_password_hash
-
     def get_by_id(self, username):
         """Return username as user id."""
-        if self.exists_user(username):
-            print(self.users[username])
+        users = self.load()
+        try:
+            return users[username]
+        except KeyError:
+            return None
+
+

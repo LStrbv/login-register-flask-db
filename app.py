@@ -2,7 +2,7 @@
 from forms import LoginForm, RegisterForm
 from UsersDatabase import UsersDatabase
 from flask import Flask, render_template, redirect, url_for, flash, session, request
-from flask_login import login_user, LoginManager, current_user, logout_user
+from flask_login import login_user, LoginManager, current_user, logout_user, login_required
 import secrets
 secret_key = secrets.token_hex(16)
 
@@ -16,7 +16,7 @@ login_manager.init_app(app)
 login_manager.user_loader
 
 
-UsersDatabase = UsersDatabase()
+usersDatabase = UsersDatabase()
 @app.route('/')
 def home():
     """Return home page."""
@@ -24,9 +24,11 @@ def home():
 
 
 @app.route('/user')
+@login_required
 def user():
     """Return user profile page."""
-    return render_template('user.html')
+    users = usersDatabase.load()
+    return render_template('user.html', users=users)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -35,22 +37,33 @@ def login():
         POST requests validate and redirect user to home page."""
     # If user is logged in.
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('user'))
 
     form = LoginForm()
-    username = form.username.data
-    password=form.password.data
-    #if form.validate_on_submit():
-    if UsersDatabase.exists_user(username):
-        UsersDatabase.check_password(username, password)
-        login_user(UsersDatabase, remember=True)
-        flash('Přihlášení proběhlo úspěšně.')
-        users_list = UsersDatabase.users_list()
-        return render_template('user.html', name=username, list=users_list)
-    """flash('Chybné jméno nebo heslo')
-    return redirect(url_for('login', title='Přihlášení')) """
+    print(form.validate_on_submit())
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        user = usersDatabase.get_by_id(username)
+        if user:
+            if user.check_password(password):
+                login_user(user, remember=True)
+                flash('Přihlášení proběhlo úspěšně.')
+                return redirect(url_for('user'))
+            else:
+                flash('Chybné heslo')
+                return redirect(url_for('login'))
+        else:
+            flash('Chybné jméno')
+            return redirect(url_for('login'))
     return render_template('login.html', form=form, title='Přihlášení')
 
+
+@app.route('/remove/<username>')
+def remove(username):
+    usersDatabase.remove_user(username)
+    flash('Uživatel byl odstraněn.')
+    return redirect(url_for('user'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -59,25 +72,31 @@ def register():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-        if UsersDatabase.exists_user(username) is not True:
-            UsersDatabase.session.add_user(username, password)
-            UsersDatabase.generate_password(password)
-            login_user(UsersDatabase)
+        user = usersDatabase.get_by_id(username)
+        if not user:
+            user = usersDatabase.add_user(username, password)
+            login_user(user, remember=True)
             return redirect(url_for('user'))
-        flash('Uživatel s tímto jménem už existuje.')
-        return render_template('register.html', form=form, title='Registrace')
-    return render_template('404.html')
+        else:
+            flash('Uživatel s tímto jménem už existuje.')
+    return render_template('register.html', form=form)
 
 
 @login_manager.user_loader
-def load_user(id):
+def load_user(username):
     """Check if user is logged-in upon page load."""
-    return id
+    return usersDatabase.get_by_id(username)
 
 @app.errorhandler(404)
 def page_not_found(error):
     """Return when page doesnt exist."""
     return render_template('404.html'), 404
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 
 

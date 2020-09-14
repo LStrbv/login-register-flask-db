@@ -4,7 +4,7 @@
         <h2>Přihlášení</h2>
         <form action="/login" method="POST",>
         <div class=form>
-
+          {{form.hidden_tag()}}
             <fieldset class="username">
                 {{form.username.label}}
                 {{form.username(size=20)}}
@@ -26,6 +26,8 @@
                       </ul>
                     {% endif %}
             </fieldset>
+
+      
                
             <div class="submit_button">
                 {{form.submit()}}

@@ -10,12 +10,12 @@
 </head>
 <body>
     <ul class="menu" id="menu">
-      <li><a href="{{ url_for('home') }}">Domů</a></li>
+      {% if current_user.is_authenticated %}
+      <li><a href="{{ url_for('user') }}">Uživatel</a></li>
+      <li><a href="{{ url_for('logout') }}">Odhlásit</a></li>
+  {% else %}
       <li><a href="{{ url_for('login') }}">Přihlášení</a></li>
       <li><a href="{{ url_for('register') }}">Registrace</a></li>
-      {% if current_user.is_authenticated %}
-      <li><a href="{{ url_for('user') }}">{{current_user.username}}</a></li>
-  {% else %}
   {% endif %}
     </ul>
     {% with messages = get_flashed_messages() %}
