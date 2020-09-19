@@ -1,47 +1,171 @@
-* { box-sizing: border-box }
+* :after, :before{ box-sizing: border-box }
 .body {
-    font-size: 16px;
-    line-height: 1.6;
-    text-align: left;
-    margin: 0;
-    padding: 0;
+    background-color: salmon;
 }
-
+/*  */.hlavicka {
+    background-image: url('static/color.jpg');
+    width: 100%;
+    height: auto;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 0;
+    display: block;
+}
 .menu {
+    display: inline-block;
+    margin: 0;
     text-align: left;
-    background-color: lightgreen;   
+    background-color: rgba(163, 238, 144, 0.4);
+  /*   margin-bottom: 0;
+    margin-top:0; */
 }
 
 .menu a {
-    color:whitesmoke;
+    color:rgb(32, 178, 170, 1);
     text-decoration: none;
-    text-align: left;
-    padding: 17px 20px;
+    padding: 17px 15px;
+    position: relative;
     display: inline-block;
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 20px;
 }
 
-.menu a:hover {
-    background-color:whitesmoke;
-    color:lightgreen;
+.menu a:hover::after {
+    background-color:rgb(32, 178, 170, 1);
+    content: "";
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    bottom: 25%;
+    border: 1px solid rgb(32, 178, 170, 1);
 }
 
-.menu a:active {
-    background-color: mediumseagreen;
-    color: whitesmoke;
+.menu a:active::after {
+    color:  rgb(32, 178, 170, 1);
+    background-color: rgba(60, 179, 114, 1);
+    content: "";
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    bottom: 25%;
+    border: 1px solid rgb(32, 178, 170, 1);
 }
 .menu li {
     display: inline;
     font-weight: 700;
 }
-.h2 {
-    padding-left: 20px;
-}
+
 .form {
-    margin: 0px 40px;
-    padding-left: 5px;
-    background-color: lightseagreen;
+    color: rgb(32, 178, 170, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10%;
+    width: 400px;
+    margin: 5% auto;
+    background-color: rgba(32, 178, 117, 0.027);
     border-radius: 20px;
+    box-shadow: 0px 0px 15px -2px rgb(54, 129, 71);
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 20px;
+    padding-top: 3%;
 }
-.fieldset {
-    border: 0;
+
+fieldset {
+    border: 0 none;
+}
+label {
+    color:rgb(32, 178, 170, 1);
+    border-radius: 10px;
+}
+.btn {
+    text-align: center;
+    background-color:  rgba(163, 238, 144, 0.5);
+    width: 48.5%;
+    height: 50px;
+    margin-left: 25%;
+    margin-top: 3%;
+    border-radius: 10px;
+    color: rgb(32, 178, 170, 1);
+    outline: none;
+    border: none /* solid  rgb(32, 178, 170, 0.5) */;
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 20px;
+}
+.btn:active {
+    background-color:  rgba(163, 238, 144, 0.8);
+    box-shadow: -2px -1px 10px -1px rgb(54, 129, 71);
+    font-size: 21px;
+}
+.formfield {
+    height: 30px;
+    border-radius: 10px;
+    border: solid 0.5px  rgb(32, 178, 170, 0.3);
+    box-sizing: border-box;
+    outline: none;
+    color:  rgb(32, 178, 170, 0.8);
+    padding-left: 40px;
+}
+.formfield:active, .formfield:hover {
+    border: solid 0.5px rgb(32, 178, 170, 0.8);   
+}
+
+.account {
+    padding: 20px 0px 20px 0px;
+    font-size: 12px;
+    text-align: center;
+    padding: 20px 5px 10px 5px;
+}
+
+.account a {
+    text-decoration: none;
+    color: rgb(32, 178, 170, 1);
+    font-size: 14px;
+    padding: 17px, 20px;
+    /* background-color: rgb(22, 134, 129, 0.6); */
+}
+
+.account a:hover {
+    color: rgb(14, 72, 110);
+}
+.account a:active {
+    color: rgb(22, 134, 129);
+}
+.errors {
+    display: block;
+    color: red;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.flashes {
+    list-style-type: none;
+    display: block;
+    color: purple;
+    padding: 17px 20px;
+    background-color: rgba(216, 238, 144, 0.4);
+    font-family: 'Roboto Mono', sans-serif;
+}
+.user {
+    display: block;
+    padding-left: 10%;
+    font-family: 'Roboto Mono', sans-serif;
+    background-color: rgba(163, 238, 144, 0.8);
+    width: 400px;
+}
+
+.user ul {
+    list-style-type: none;
+    display: block;
+    margin: 0 auto;
+    
+}
+.userprofile {
+    display: block;
+    size: 300px;
+    border: 1px solid grey;
+}
+img {
+    width: 50px;
+    height: 50px;
 }

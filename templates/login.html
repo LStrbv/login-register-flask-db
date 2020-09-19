@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
     {% block content %} 
     <div class="form" id="form">
-        <h2>Přihlášení</h2>
         <form action="/login" method="POST",>
-        <div class=form>
+        <div class=forms>
           {{form.hidden_tag()}}
             <fieldset class="username">
-                {{form.username.label}}
-                {{form.username(size=20)}}
+
+                {{form.username.label}} <br>
+                {{form.username(size=40, class="formfield")}}
                 {% if form.username.errors %}
                       <ul class="errors">
                         {% for error in form.username.errors %}
@@ -17,25 +17,23 @@
             </fieldset>
 
             <fieldset class="password">
-                {{form.password.label}}
-                {{form.password(size=20)}}
+                {{form.password.label}} <br>
+                {{form.password(size=40, class="formfield")}}
                 {% if form.password.errors %}
-                      <ul class="errors">
                         {% for error in form.password.errors %}
-                          <li>{{ error }}</li>{% endfor %}
-                      </ul>
+                        <span class="errors" style="color: red;"> {{ error }}</span>
+                        {% endfor %}
                     {% endif %}
             </fieldset>
 
-      
-               
-            <div class="submit_button">
-                {{form.submit()}}
+            <div class="button">
+                {{form.submit(class="btn")}}
             </div> 
-
+            <div class ="account">
+              Pokud uživatelský účet nemáš, <a href="{{ url_for('register') }}">zaregistruj se.</a>
+            </div>
         </div>
-        </form>
-        <p>Pokud uživatelský účet nemáš, <a href="{{ url_for('register') }}">zaregistruj se</a>.</p>
+        </form>   
     </div>
 {% endblock %}
 

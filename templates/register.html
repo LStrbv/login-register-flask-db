@@ -1,38 +1,51 @@
 {% extends "layout.html" %}
     {% block content %} 
     <div class="form" id="form">
-        <h2>Registrace</h2>
+        <!-- <h2>Registrace</h2> -->
         <form action="/register" method="POST">
-            <div class=form>
+            <div class=forms>
                 {{form.hidden_tag()}}
                 <fieldset class="username">
                     {{form.username.label}}
-                    {{form.username(size=20)}}
+                    {{form.username(size=40, class="formfield")}}
                 </fieldset>
+                
+                <fieldset class="profile_picture">
+                  {{form.profile_picture.label}}
+                  {{form.profile_picture(size=40, class="formfield")}}
+              </fieldset>
+
     
                 <fieldset class="password">
                     {{form.password.label}}
-                    {{form.password(size=20)}}
+                    {{form.password(size=40, class="formfield")}}
+                    {% if form.password.errors %}
+                      {% for error in form.password.errors %}
+                      <span class="errors" >{{ error }}</span>
+                      {% endfor %}
+                  {% endif %}
                 </fieldset>
 
                 <fieldset class="confirm">
                     {{ form.confirm_password.label }}
-                    {{ form.confirm_password }}
+                    {{ form.confirm_password(size=40, class="formfield")}}
                     {% if form.confirm_password.errors %}
                       <ul class="errors">
                         {% for error in form.confirm_password.errors %}
-                          <li>{{ error }}</li>{% endfor %}
+                        <span style="color: red;">{{ error }}</span>{% endfor %}
                       </ul>
                     {% endif %}
                   </fieldset>
                    
-                <div class="submit_button">
-                    {{form.signup()}}
+                <div class="button">
+                    {{form.signup(class="btn")}}
                 </div> 
-                         
+                <div class ="account">
+                    Pokud už účet máš, <a href="{{ url_for('login') }}">přihlas se.</a>
+                </div>       
             </div>
             </form>
-        <p>Pokud máš užívatelský účet, <a href="{{ url_for('login') }}">přihlas se</a>.</p>
+            
         
     </div>
 {% endblock %}
