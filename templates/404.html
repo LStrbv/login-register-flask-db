@@ -1,5 +1,14 @@
-{% extends "layout.html" %}
-{% block content %}
-<p class="404">404</p>
-<p>Stránka neexistuje. Vraťte se <a href="{{ url_for('home') }}">domů.</a> </p>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+</head>
+<body>
+    <div class="page404">
+        <p>404</p>
+        <p>Stránka neexistuje. Vraťte se <a href="{{ url_for('home') }}">domů.</a> </p>
+    </div>
+</body>
+</html>

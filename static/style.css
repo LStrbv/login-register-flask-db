@@ -1,8 +1,9 @@
 * :after, :before{ box-sizing: border-box }
 .body {
-    background-color: salmon;
+    background-color: rgba(54, 65, 60, 0.192);
+    margin: 0 auto;
 }
-/*  */.hlavicka {
+.hlavicka {
     background-image: url('static/color.jpg');
     width: 100%;
     height: auto;
@@ -12,12 +13,10 @@
     display: block;
 }
 .menu {
-    display: inline-block;
+    display: block;
     margin: 0;
     text-align: left;
-    background-color: rgba(163, 238, 144, 0.4);
-  /*   margin-bottom: 0;
-    margin-top:0; */
+    background-color: rgba(163, 238, 144, 0.4)
 }
 
 .menu a {
@@ -88,7 +87,7 @@ label {
     border-radius: 10px;
     color: rgb(32, 178, 170, 1);
     outline: none;
-    border: none /* solid  rgb(32, 178, 170, 0.5) */;
+    border: none;
     font-family: 'Roboto Mono', sans-serif;
     font-size: 20px;
 }
@@ -122,7 +121,6 @@ label {
     color: rgb(32, 178, 170, 1);
     font-size: 14px;
     padding: 17px, 20px;
-    /* background-color: rgb(22, 134, 129, 0.6); */
 }
 
 .account a:hover {
@@ -139,33 +137,67 @@ label {
 }
 
 .flashes {
+    margin: 0 auto;
     list-style-type: none;
     display: block;
     color: purple;
-    padding: 17px 20px;
     background-color: rgba(216, 238, 144, 0.4);
     font-family: 'Roboto Mono', sans-serif;
 }
 .user {
+    position: relative;
     display: block;
-    padding-left: 10%;
+    margin: 4% 0% 0% 20%;
     font-family: 'Roboto Mono', sans-serif;
-    background-color: rgba(163, 238, 144, 0.8);
     width: 400px;
+    color: rgb(49, 43, 43);
 }
 
 .user ul {
-    list-style-type: none;
-    display: block;
-    margin: 0 auto;
-    
+    list-style-type: none;  
+}
+.user a {
+    text-decoration: none;
+    background-color:  rgba(163, 238, 144, 0.5);
+    padding: 1px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: rgb(32, 178, 170, 1);
+}
+.user a:active {
+    color: rgba(163, 238, 144, 0.8);
+    box-shadow: -1px -1px 2px -1px rgb(54, 129, 71, 0.4);
 }
 .userprofile {
-    display: block;
+    position: absolute;
+    right: -500px;
+    display: none;
     size: 300px;
-    border: 1px solid grey;
+    padding: 5%;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px -2px rgb(54, 129, 71);
+    background-color: rgba(32, 178, 117, 0.027);
 }
-img {
-    width: 50px;
-    height: 50px;
+.userprofile_show {
+    display: block;
+    position: absolute;
+    right: -500px;
+    size: 300px;
+    padding: 5%;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px -2px rgb(54, 129, 71);
+    background-color: rgba(32, 178, 117, 0.027);
+}
+.img {
+    size: 50px;
+    border-radius: 20px;
+}
+
+.page404 {
+    margin: 0 auto;
+    font-family: 'Roboto Mono', sans-serif;
+}
+
+.page404 a {
+    text-decoration: none;
 }

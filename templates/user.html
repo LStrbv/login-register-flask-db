@@ -2,24 +2,24 @@
 {% block content %}
     <div class="user">
         <p>
-            {{current_user.username}}, Vítej na webu!</p>
+            Ahoj {{current_user.username}}, vítej na webu.</p>
 
-        <p> Na webu jsou registrovaní tito uživatelé: </p>
+        <p> Kromě tebe jsou na webu tito uživatelé: </p>
         <ul>
             {% for  username, user in users.items() %}
-            <li>
+            <li class="profile">
                 {{username}} 
+                <div class="userprofile">
+                    <img src={{users[username]['picture']}}></a>
+                    <!-- {{username}} -->
+                </div>
                 {% if username != current_user.username %}
                 <a href="{{url_for('remove', username=username)}}">Smazat</a>
-                        <div class="userprofile">
-                            <img src='https://cdn.pixabay.com/photo/2015/12/01/20/28/green-1072828_960_720.jpg'>
-                            {{username}}
-
-                        </div>
                 {% endif %} 
             </li>
             {% endfor %}
         </ul>
+        <p> Můžeš si z nich vystřelit a profil jim smazat. </p>
     </div>
 {% endblock %}
 

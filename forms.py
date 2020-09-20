@@ -24,10 +24,10 @@ class RegisterForm(FlaskForm):
         ]
     )
 
-    profile_picture = StringField(
+    picture = StringField(
         'Profilový obrázek-url',
         validators=[
-            DataRequired(), 
+            DataRequired(),
         ],
     )
     confirm_password = PasswordField(

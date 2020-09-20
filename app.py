@@ -72,9 +72,10 @@ def register():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
+        picture = form.picture.data
         user = usersDatabase.get_by_id(username)
         if not user:
-            user = usersDatabase.add_user(username, password)
+            user = usersDatabase.add_user(username, password, picture)
             login_user(user, remember=True)
             return redirect(url_for('user'))
         else:

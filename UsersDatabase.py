@@ -5,12 +5,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(UserMixin):
-    def __init__(self, username, password):
+    def __init__(self, username, password, picture):
         self.username = username
-        self.password = password
-
+        self.password = password 
+        self.picture = picture
     def to_dict(self):
-        return {"username": self.username, "password": self.password}
+        return {"username": self.username, "password": self.password, "picture": self.picture}
 
     def check_password(self, password):
         """Check hashed password."""
@@ -34,7 +34,7 @@ class UsersDatabase():
             users = json.load(json_string)
             new_dict = dict()
             for username, user in users.items():
-                new_dict[user['username']] = User(user['username'], user['password'])
+                new_dict[user['username']] = User(user['username'], user['password'], user['picture'])
             return new_dict
 
     def save(self, users):
@@ -44,11 +44,11 @@ class UsersDatabase():
         with open(self.file_name, "w", encoding='utf=8') as outfile:
             json.dump(json_dict, outfile)
 
-    def add_user(self, username, password):
+    def add_user(self, username, password, picture):
         """Add new user to the dictionary."""
         if not self.get_by_id(username):
             users = self.load()
-            users[username] = User(username, self.generate_password(password))
+            users[username] = User(username, self.generate_password(password), picture)
             self.save(users)
             return users[username]
 
