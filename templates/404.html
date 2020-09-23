@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
     <title>404</title>
 </head>
 <body>
+    {% block content %}
     <div class="page404">
-        <p>404</p>
+        <h1 class="nadpis">404<h1>
         <p>Stránka neexistuje. Vraťte se <a href="{{ url_for('home') }}">domů.</a> </p>
     </div>
+    {% endblock %}
 </body>
 </html>

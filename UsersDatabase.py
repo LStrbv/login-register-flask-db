@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class User(UserMixin):
     def __init__(self, username, password, picture):
         self.username = username
-        self.password = password 
+        self.password = password
         self.picture = picture
     def to_dict(self):
         return {"username": self.username, "password": self.password, "picture": self.picture}

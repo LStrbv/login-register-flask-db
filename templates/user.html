@@ -5,13 +5,13 @@
             Ahoj {{current_user.username}}, vítej na webu.</p>
 
         <p> Kromě tebe jsou na webu tito uživatelé: </p>
-        <ul>
+        <ul id="profile">
             {% for  username, user in users.items() %}
-            <li class="profile">
+            <li>
                 {{username}} 
                 <div class="userprofile">
-                    <img src={{users[username]['picture']}}></a>
-                    <!-- {{username}} -->
+                  <!--   {{username}} -->
+                     <img src={{users[username]['picture']}} style="width:60px;height:60px;" >
                 </div>
                 {% if username != current_user.username %}
                 <a href="{{url_for('remove', username=username)}}">Smazat</a>
@@ -21,5 +21,6 @@
         </ul>
         <p> Můžeš si z nich vystřelit a profil jim smazat. </p>
     </div>
+    <script src="static/script.js"></script>
 {% endblock %}
 

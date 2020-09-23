@@ -61,6 +61,7 @@ def login():
 
 @app.route('/remove/<username>')
 def remove(username):
+    """Remove user."""
     usersDatabase.remove_user(username)
     flash('Uživatel byl odstraněn.')
     return redirect(url_for('user'))
@@ -96,6 +97,7 @@ def page_not_found(error):
 @app.route('/logout')
 @login_required
 def logout():
+    """Logout user."""
     logout_user()
     return redirect(url_for('home'))
 
