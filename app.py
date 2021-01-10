@@ -33,8 +33,7 @@ def user():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """GET return registration form.
-        POST requests validate and redirect user to home page."""
+    """GET return registration form. POST requests validate and redirect user to home page."""
     # If user is logged in.
     if current_user.is_authenticated:
         return redirect(url_for('user'))
@@ -62,6 +61,7 @@ def login():
 @app.route('/remove/<username>')
 def remove(username):
     """Remove user."""
+    
     usersDatabase.remove_user(username)
     flash('Uživatel byl odstraněn.')
     return redirect(url_for('user'))
@@ -100,7 +100,6 @@ def logout():
     """Logout user."""
     logout_user()
     return redirect(url_for('home'))
-
 
 
 if __name__ == "__main__":

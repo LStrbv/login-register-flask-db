@@ -1,4 +1,25 @@
-* :after, :before{ box-sizing: border-box }
+* :after, :before{ box-sizing: border-box}
+
+* {
+
+    font-family: 'Roboto Mono', sans-serif;
+
+}
+.hlavicka {
+    height: 200px;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    
+}
+.logo-header {
+    position: absolute;
+    height: 200px;
+    width: 100%;
+    background-position: center;
+}
+
+
 .menu {
     display: block;
     margin: 0;
@@ -12,7 +33,6 @@
     padding: 17px 15px;
     position: relative;
     display: inline-block;
-    font-family: 'Roboto Mono', sans-serif;
     font-size: 20px;
 }
 
@@ -52,7 +72,6 @@
     background-color: rgba(32, 178, 117, 0.027);
     border-radius: 20px;
     box-shadow: 0px 0px 15px -2px rgb(54, 129, 71);
-    font-family: 'Roboto Mono', sans-serif;
     font-size: 20px;
     padding-top: 3%;
 }
@@ -72,10 +91,9 @@ label {
     margin-left: 25%;
     margin-top: 3%;
     border-radius: 10px;
-    color: rgb(32, 178, 170, 1);
+    color: rgb(27, 99, 95);
     outline: none;
     border: none;
-    font-family: 'Roboto Mono', sans-serif;
     font-size: 20px;
 }
 .btn:active {
@@ -129,16 +147,13 @@ label {
     display: block;
     color: purple;
     background-color: rgba(216, 238, 144, 0.4);
-    font-family: 'Roboto Mono', sans-serif;
+
 }
 .user {
-    /* position: relative; */
     display: block;
-    margin: 4% 0% 0% 20%;
-    font-family: 'Roboto Mono', sans-serif;
-    width: 400px;
-    color: rgb(49, 43, 43);
     
+    margin: 4% 0% 0% 10%;
+
 }
 
 .user ul {
@@ -160,42 +175,41 @@ label {
     position: relative;
 }
 .detail {
-    position: absolute;
-    /* //right: -300px; */
-    display: none;
-    /* size: 100px;
-    padding: 5%;
-    border-radius: 20px;
-    box-shadow: 0px 0px 15px -2px rgb(54, 129, 71);
-    background-color: rgba(32, 178, 117, 0.027); */
-    
-
+    display: none; 
 }
+
 .userprofile_show {
     display: block;
     position: absolute;
     right: 400px;
     top: -150px;
-    size: 300px;
+    size: 500px 300px;
     padding: 1%;
     border-radius: 20px;
-    box-shadow: 0px 0px 15px -2px rgb(54, 129, 71);
-    background-color: rgba(32, 178, 117, 0.027);
+    box-shadow: 0px 0px 6px -2px rgb(54, 129, 71);
+    background-color: rgba(218, 255, 239, 0.986);
     margin-top: 30%;
     margin-bottom: 50%;
-    
-    
+    text-align: center;
 }
 
+.profile li {
+    padding-left: 60px;
+}
+.userprofile_show img {
+    height: 250px;
+    width: 200;
+    padding: 4px;
+    border-radius: 20px;
+}
 
-img {
-    size: 200px auto;
+.name {
+    color:rgb(29, 117, 66)
 }
 
 .page404 {
     display: block;
     margin: 10% auto;
-    font-family: 'Roboto Mono', sans-serif;
     width: 400px;
     color: slategrey;
 }

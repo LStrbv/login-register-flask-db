@@ -4,25 +4,28 @@
         <p>
             Ahoj {{current_user.username}}, vítej na webu.</p>
 
-        <p> Kromě tebe jsou na webu tito uživatelé: </p>
+        <p>Zde najdeš seznam všech uživatelů. </p>
+        <p>Můžeš si tedy někoho z nich přidat do přátel, ale pozor, také smazat svůj profil.</p>
         <ul id='profile'>
             {% for  username, user in users.items() %}
             <li id="userprofile">
                 {{username}} 
                 <div id='detail' class="detail">
-                    {{username}}
-                  <!--   {{username}} -->
-                    
-                    <img src={{users[username]['picture']}} style="width:60px;height:60px;" >
+
+                    <div class='name' id='nameInProfile'>{{username}}</div>
+
+                    <img class='image' src={{users[username]['picture']}}>
                     
                 </div>
-                {% if username != current_user.username %}
-                <a href="{{url_for('remove', username=username)}}">Smazat</a>
+                {% if username == current_user.username %}
+                <a id="remove" href="{{url_for('remove', username=username)}}">Smazat profil</a>
+
+                {% elif username != current_user %}
+                <a href="#">Přidat do přátel</a>
                 {% endif %} 
             </li>
             {% endfor %}
         </ul>
-        <p> Můžeš si z nich vystřelit a profil jim smazat. </p>
     </div>
     <script src="static/script.js"></script>
 {% endblock %}

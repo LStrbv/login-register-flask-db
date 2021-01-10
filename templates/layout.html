@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
     <link rel="stylesheet" href="static/style.css">
-    <!-- <script src="static/script.js"></script> -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class='hlavicka'></div>
+    <div class='hlavicka'>
+      <img class='logo-header' src='./static/trees.png'>
+    </div>
+      
     <ul class="menu" id="menu">
       {% if current_user.is_authenticated %}
       <li><a href="{{ url_for('user') }}">Uživatel</a></li>
