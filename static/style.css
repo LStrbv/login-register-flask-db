@@ -132,12 +132,13 @@ label {
     font-family: 'Roboto Mono', sans-serif;
 }
 .user {
-    position: relative;
+    /* position: relative; */
     display: block;
     margin: 4% 0% 0% 20%;
     font-family: 'Roboto Mono', sans-serif;
     width: 400px;
     color: rgb(49, 43, 43);
+    
 }
 
 .user ul {
@@ -155,33 +156,40 @@ label {
     color: rgba(163, 238, 144, 0.8);
     box-shadow: -1px -1px 2px -1px rgb(54, 129, 71, 0.4);
 }
-.userprofile {
+.profile {
+    position: relative;
+}
+.detail {
     position: absolute;
-    right: -300px;
+    /* //right: -300px; */
     display: none;
-    size: 100px;
+    /* size: 100px;
     padding: 5%;
     border-radius: 20px;
     box-shadow: 0px 0px 15px -2px rgb(54, 129, 71);
-    background-color: rgba(32, 178, 117, 0.027);
+    background-color: rgba(32, 178, 117, 0.027); */
+    
 
 }
 .userprofile_show {
     display: block;
     position: absolute;
-    right: -200px;
+    right: 400px;
+    top: -150px;
     size: 300px;
-    padding: 5%;
+    padding: 1%;
     border-radius: 20px;
     box-shadow: 0px 0px 15px -2px rgb(54, 129, 71);
     background-color: rgba(32, 178, 117, 0.027);
-    margin-top: 50%;
+    margin-top: 30%;
     margin-bottom: 50%;
+    
+    
 }
 
 
-.img {
-    size: 20px;
+img {
+    size: 200px auto;
 }
 
 .page404 {

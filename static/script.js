@@ -1,7 +1,10 @@
-let profile = document.getElementById('profile');
-console.log(profile);
+let userprofile = document.querySelectorAll('#userprofile');
+userprofile.forEach(el => {
+    el.addEventListener('click', function() {
+        console.log('a');
+        a = el.querySelector('#detail');
+        a.classList.toggle('userprofile_show');
 
-profile.addEventListener("mouseover", function() {
-    document.querySelector("userprofile").classList.toggle("userprofile_show")
-});
+    });
 
+})
