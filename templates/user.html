@@ -2,31 +2,32 @@
 {% block content %}
     <div class="user">
         <p>
-            Ahoj {{current_user.username}}, vítej na webu.</p>
+            Ahoj {{current_user.username}}, vítej na profilu.
+        </p>
 
         <p>Zde najdeš seznam všech uživatelů. </p>
         <p>Můžeš si tedy někoho z nich přidat do přátel, ale pozor, také smazat svůj profil.</p>
         <ul id='profile'>
-            {% for  username, user in users.items() %}
+            {% for  u in users %}
             <li id="userprofile">
-                {{username}} 
+                {{u.username}} 
                 <div id='detail' class="detail">
 
-                    <div class='name' id='nameInProfile'>{{username}}</div>
+                    <div class='name' id='nameInProfile'>{{u.username}}</div>
 
-                    <img class='image' src={{users[username]['picture']}}>
+                    <img class='image' src={{u.picture}}>
                     
                 </div>
-                {% if username == current_user.username %}
+                {% if u.username == current_user.username %}
                 <a id="remove" href="{{url_for('remove', username=username)}}">Smazat profil</a>
 
-                {% elif username != current_user %}
+                {% elif u.username != current_user %}
                 <a href="#">Přidat do přátel</a>
                 {% endif %} 
             </li>
             {% endfor %}
         </ul>
-    </div>
+        </div>
     <script src="static/script.js"></script>
 {% endblock %}
 
