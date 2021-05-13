@@ -223,3 +223,7 @@ label {
     color: rgb(32, 178, 170, 1);
     font-weight: 700;
 }
+
+#added {
+    visibility: hidden;
+}
