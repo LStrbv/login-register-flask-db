@@ -1,63 +1,27 @@
 """Routes for home, login and register."""
 from forms import LoginForm, RegisterForm
 import secrets
+from UsersDatabase import User
+from db import db
 from flask import Flask, render_template, redirect, url_for, flash, session, request
 from flask_login import login_user, LoginManager, current_user, logout_user, login_required
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
 secret_key = secrets.token_hex(16)
-from flask_login import UserMixin
+
+
+def register_extensions(app):
+    db.init_app(app)
+
 
 app = Flask(__name__)
+register_extensions(app)
 app.config['SECRET_KEY'] = secret_key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
 login_manager.user_loader
-
-
-
-class User(db.Model, UserMixin):
-    __tablename__ = 'users'
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
-    username = db.Column(
-        db.String(100),
-        nullable=False,
-        unique=False
-    )
-    password = db.Column(
-        db.String(200),
-        primary_key=False,
-        unique=False,
-        nullable=False
-    )
-    picture = db.Column(
-        db.String(60),
-        index=False,
-        unique=False,
-        nullable=True
-    )
-    
-
-    def set_password(self, password):
-        """Create hashed password."""
-        self.password = generate_password_hash(
-            password,
-            method='sha256'
-        )
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
-
-    def __repr__(self):
-        return "<User {}>".format(self.username)
 
 """ usersDatabase = UsersDatabase() """
 @app.route('/')
@@ -70,7 +34,6 @@ def home():
 @login_required
 def user():
     """Return user profile page."""
-
     users = User.query.all()
     return render_template('user.html', users=users)
 
@@ -106,9 +69,10 @@ def remove(username):
     user = User.query.filter_by(username=username).first()
     db.session.delete(user)
     db.session.commit()
-    
+
     flash('Uživatel byl odstraněn.')
     return redirect(url_for('home'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -132,8 +96,6 @@ def register():
     return render_template('register.html', form=form)
 
 
-
-
 @login_manager.user_loader
 def load_user(user_id):
     """Check if user is logged-in upon page load."""
@@ -141,10 +103,12 @@ def load_user(user_id):
         return User.query.get(user_id)
     return None
 
+
 @app.errorhandler(404)
 def page_not_found(error):
     """Return when page doesnt exist."""
     return render_template('404.html'), 404
+
 
 @app.route('/logout')
 @login_required
@@ -155,5 +119,4 @@ def logout():
 
 
 if __name__ == "__main__":
-    db.create_all()
     app.run(debug=True)

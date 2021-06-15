@@ -2,10 +2,9 @@
 {% block content %}
     <div class="user">
         <p>
-            Hi {{current_user.username}}, welcome to your profile.
+            Ahoj {{current_user.username}}, vítej na profilu.
         </p>
-        <p>You can delete your profile here or add other user as a friend.</p>
-        <p>You have <div id="count">0</div> friends.</p>
+        <p></p>
         <ul id='profile'>
             {% for  u in users %}
             <li id="userprofile">
@@ -19,10 +18,10 @@
                 </div>
                 </li>
                 {% if u.username == current_user.username %}
-                <a id="remove" href="{{url_for('remove', username=u.username)}}">Delete</a>
+                <a id="remove" href="{{url_for('remove', username=u.username)}}">Smazat profil</a>
 
                 {% elif u.username != current_user %}
-                <a class="add_to" id="add_friend" href="#">Add friend</a>
+                <a class="add_to" id="add_friend" href="#">Přidat do přátel</a>
                 {% endif %} 
             
             {% endfor %}
